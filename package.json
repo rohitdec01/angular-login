@@ -43,6 +43,8 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",
     "typescript": "~3.7.5",
-    "@w11k/ngx-componentdestroyed": "^5.0.2"
+    "@w11k/ngx-componentdestroyed": "^5.0.2",
+    "ngx-cookie": "^4.1.2",
+    "@nguniversal/express-engine": "9.0.0-rc.2"
   }
 }

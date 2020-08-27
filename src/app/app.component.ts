@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {LoginService} from './service/login.service';
+import {Component} from '@angular/core';
 import {OnDestroyMixin} from '@w11k/ngx-componentdestroyed';
 
 @Component({
@@ -7,13 +6,15 @@ import {OnDestroyMixin} from '@w11k/ngx-componentdestroyed';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent extends OnDestroyMixin implements OnInit {
+export class AppComponent extends OnDestroyMixin {
+  requiredErrorMessage =  'Email is required';
 
-  constructor(private loginService: LoginService) {
+  constructor() {
     super();
   }
 
-  ngOnInit(): void {
-
+  loginValueEmitterhandler(loginValues: any) {
+    console.log(loginValues.email);
+    console.log(loginValues.password);
   }
 }

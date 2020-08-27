@@ -1,0 +1,33 @@
+<div>
+  <span *ngFor="let number of [0,1,2]">No style div   ||</span>
+</div>
+
+<div style="display: flex; justify-content: center">
+  <span *ngFor="let number of [0,1,2]">flex and Justify-content: center   ||</span>
+</div>
+
+<span>Row Container</span>
+<div class="flex-container">
+  <span class="flex-item">0</span>
+  <span class="flex-item">1</span>
+  <span class="flex-item">2</span>
+  <span class="flex-item">3</span>
+</div>
+
+<span>3 Column Container</span>
+<div class="cards-layout">
+  <div class="cards-group" id="default-cards">
+    <span class="flex-item">patient card</span>
+    <span class="flex-item">Clinical card</span>
+    <span class="flex-item">provider card</span>
+  </div>
+  <div class="cards-group" id="summary-quality-cards">
+    <span class="flex-item">los card</span>
+    <span class="flex-item">mortality card</span>
+    <span class="flex-item">complication card</span>
+  </div>
+  <div class="cards-group" id="summary-cost-cards">
+    <span class="flex-item">rcc card</span>
+    <span class="flex-item">reported card</span>
+  </div>
+</div>

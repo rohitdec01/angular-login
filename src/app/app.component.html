@@ -1,1 +1,3 @@
-<app-login></app-login>
+<app-login (loginValueEmitter)="loginValueEmitterhandler($event)"
+  [requiredErrorMessage]="requiredErrorMessage"></app-login>
+<!--<app-dashboard></app-dashboard>-->

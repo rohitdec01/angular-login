@@ -1,31 +1,47 @@
 <h1>
   Please Login
 </h1>
-<form [formGroup]="loginForm" (ngSubmit)="loginHandler()">
+<form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && loginHandler()">
   <div class="form-group">
-    <label for="username">Username</label>
-    <input type="text" id="username" name="username" formControlName="username" class="form-control"
-           [ngClass]="{ 'is-invalid': f.username.errors }"
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email"
+           formControlName="email"
+           class="form-control email"
+           placeholder="Enter your email"
+           [ngClass]="{ 'is-invalid': f.email.touched &&  f.email.invalid }"
            maxlength="255"/>
-    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-      <div *ngIf="f.username.errors.required">Username is required</div>
-      <p *ngIf="f.username.errors.pattern">Please use only supported special characters</p>
+    <div *ngIf="f.email.touched && f.email.invalid" class="invalid-feedback emailError">
+      <p *ngIf="f.email.errors.required">{{requiredErrorMessage}}</p>
+      <p *ngIf="f.email.errors.email">Enter valid email format.</p>
+      <p *ngIf="f.email.errors.minlength">Minumum length should be 5 character.</p>
+      <p *ngIf="f.email.errors.pattern">Please use only supported special characters</p>
     </div>
   </div>
 
   <div class="form-group">
     <label for="password">Password</label>
-    <input type="password" id="password" formControlName="password" class="form-control"
-           [ngClass]="{ 'is-invalid': f.password.errors }"/>
-    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+    <input type="password" id="password"
+           name="password"
+           formControlName="password"
+           class="form-control password"
+           placeholder="Enter password"
+           [ngClass]="{ 'is-invalid': f.password.touched &&  f.password.invalid }"/>
+    <div id="passwordErrorMessage"*ngIf="f.password.touched && f.password.invalid" class="invalid-feedback">
       <p *ngIf="f.password.errors.required">Password is required</p>
+      <p *ngIf="f.password.errors.minlength">Minumum length should be 3 character.</p>
       <p *ngIf="f.password.errors.pattern">Please use only supported special characters</p>
     </div>
   </div>
 
   <div class="form-group">
-    <button class="btn btn-primary">Login</button>
+    <button class="btn btn-primary login" [disabled]="!loginForm.valid">Login</button>
     <!--<a routerLink="/registration" class="btn btn-link">Register</a>-->
   </div>
 
 </form>
+
+
+
+
+
+

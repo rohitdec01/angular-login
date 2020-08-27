@@ -1,0 +1,39 @@
+.flex-container {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  /*  display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-layout {
+  display: flex;
+  justify-content: space-between;
+  width: 98%;
+}
+
+.cards-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.5rem;
+}
+
+.flex-item {
+  background: tomato;
+  color: white;
+  padding: 5px;
+  width: 20.5rem;
+  height: 150px;
+  margin: 10px;
+  line-height: 150px;
+
+  font-weight: bold;
+  font-size: 3em;
+  text-align: center;
+}

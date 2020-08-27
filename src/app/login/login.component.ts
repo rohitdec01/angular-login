@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginService} from '../service/login.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestroyed';
@@ -9,6 +9,9 @@ import {OnDestroyMixin, untilComponentDestroyed} from '@w11k/ngx-componentdestro
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends OnDestroyMixin implements OnInit {
+
+  @Output() loginValueEmitter = new EventEmitter<any>();
+  @Input() requiredErrorMessage: string;
 
   loginForm: FormGroup;
   submitted = false;
@@ -24,22 +27,28 @@ export class LoginComponent extends OnDestroyMixin implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.compose([Validators.required, Validators.pattern('[ -~]*')])],
-      password: ['', Validators.compose([Validators.required, Validators.pattern('[ -~]*')])],
+      email: ['', Validators.compose([
+        Validators.required,
+        Validators.email,
+        Validators.minLength(5),
+        Validators.pattern('[ -~]*')])],
+      password: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.pattern('[ -~]*')])],
     });
+    console.log(this.requiredErrorMessage);
   }
 
   loginHandler() {
     this.submitted = true;
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
+    console.log(this.loginForm.value.email, 'OR', this.loginForm.get('email').value); // OR
+    this.loginValueEmitter.emit(this.loginForm.value); // for testing only.
 
     this.loginService.login()
       .pipe(untilComponentDestroyed(this))
-      .subscribe(str => {
-        console.log('jwt token:', str.jwt);
+      .subscribe(token => {
+        this.loginService.saveToken(token.jwt);
       });
   }
 }
