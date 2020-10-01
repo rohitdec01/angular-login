@@ -26,11 +26,26 @@
            class="form-control password"
            placeholder="Enter password"
            [ngClass]="{ 'is-invalid': f.password.touched &&  f.password.invalid }"/>
-    <div id="passwordErrorMessage"*ngIf="f.password.touched && f.password.invalid" class="invalid-feedback">
+    <div id="passwordErrorMessage" *ngIf="f.password.touched && f.password.invalid" class="invalid-feedback">
       <p *ngIf="f.password.errors.required">Password is required</p>
       <p *ngIf="f.password.errors.minlength">Minumum length should be 3 character.</p>
       <p *ngIf="f.password.errors.pattern">Please use only supported special characters</p>
     </div>
+  </div>
+
+  <div class="form-group">
+    <label for="organization-select">Department</label>
+    <!--[value]="currentRiskModel.riskModelKey"-->
+    <select id="organization-select" formControlName="organization"
+            (change)="onOrganizationChange($event.target)"
+            [value]="selectedOrg">
+      <!--[selected]="currentRiskModel.riskModelKey === riskModel.riskModelKey"-->
+      <option *ngFor="let org of organizationMetadata"
+              [selected]="org.orgKey === selectedOrg"
+              [value]="org.orgKey">
+        {{org.orgValue}}
+      </option>
+    </select>
   </div>
 
   <div class="form-group">
